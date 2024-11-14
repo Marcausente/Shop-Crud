@@ -17,7 +17,7 @@ $sqlCities = "CREATE TABLE IF NOT EXISTS cities (
     name VARCHAR(100) NOT NULL
 )";
 if ($conn->query($sqlCities) === true) {
-    echo "Tabla cities creada exitosamente.<br>";
+  //  echo "Tabla cities creada exitosamente.<br>";
 } else {
     echo "Error al crear la tabla cities: " . $conn->error . "<br>";
 }
@@ -33,7 +33,7 @@ $sqlFoodDrinkNoExpendeable = "CREATE TABLE IF NOT EXISTS FoodDrinkNoExpendeable(
 )";
 
 if ($conn->query($sqlFoodDrinkNoExpendeable) === true) {
-    echo "Tabla Food_Drink_NoExpendeable creada exitosamente.<br>";
+  //  echo "Tabla Food_Drink_NoExpendeable creada exitosamente.<br>";
 } else {
     echo "Error al crear la tabla Food_Drink_NoExpendeable: " . $conn->error . "<br>";
 }
@@ -51,7 +51,7 @@ $sqlStores = "CREATE TABLE IF NOT EXISTS stores (
     FOREIGN KEY (city) REFERENCES cities(id) ON DELETE CASCADE
 )";
 if ($conn->query($sqlStores) === true) {
-    echo "Tabla stores creada exitosamente.<br>";
+    //echo "Tabla stores creada exitosamente.<br>";
 } else {
     echo "Error al crear la tabla stores: " . $conn->error . "<br>";
 }
@@ -74,7 +74,7 @@ $row = $result->fetch_assoc();
 if ($row['count'] == 0) {
     $sqlInsertMadrid = "INSERT INTO cities (id, name) VALUES (1, 'Madrid')";
     if ($conn->query($sqlInsertMadrid) === true) {
-        echo "Ciudad Madrid insertada exitosamente.<br>";
+        //echo "Ciudad Madrid insertada exitosamente.<br>";
     } else {
         echo "Error al insertar Madrid: " . $conn->error . "<br>";
     }
@@ -88,7 +88,7 @@ $row = $result->fetch_assoc();
 if ($row['count'] == 0) {
     $sqlInsertBarcelona = "INSERT INTO cities (id, name) VALUES (2, 'Barcelona')";
     if ($conn->query($sqlInsertBarcelona) === true) {
-        echo "Ciudad Barcelona insertada exitosamente.<br>";
+      //  echo "Ciudad Barcelona insertada exitosamente.<br>";
     } else {
         echo "Error al insertar Barcelona: " . $conn->error . "<br>";
     }
@@ -109,7 +109,7 @@ if ($row['count'] == 0) {
 }
 
 if ($conn->query($sqlStoresItems) === true) {
-    echo "Tabla Stores_Items creada exitosamente.<br>";
+   // echo "Tabla Stores_Items creada exitosamente.<br>";
 } else {
     echo "Error al crear la tabla Stores_Items: " . $conn->error . "<br>";
 }

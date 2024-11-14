@@ -48,6 +48,113 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Tienda</title>
+    <style>
+        /* Estilo global */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #444;
+        }
+
+        /* Estilo para el título */
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Contenedor del formulario */
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px; /* Ajustar el ancho del formulario */
+        }
+
+        /* Estilo de las etiquetas */
+        label {
+            display: block;
+            font-size: 0.9rem; /* Reducir tamaño de texto */
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        /* Estilo para los campos de entrada */
+        input[type="text"],
+        input[type="email"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px; /* Reducir espacio entre campos */
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="time"]:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        /* Estilo para el botón de envío */
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Estilo para el enlace */
+        a.boton {
+            display: block;
+            text-align: center;
+            color: #2196F3;
+            margin-top: 15px; /* Reducir espacio */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 0;
+            background-color: #e1f5fe;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        a.boton:hover {
+            background-color: #bbdefb;
+        }
+
+        /* Estilo para mensajes (error, éxito, etc.) */
+        .mensaje {
+            color: #d32f2f;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 <h1>Formulario de Datos de Tienda</h1>

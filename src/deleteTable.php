@@ -1,31 +1,71 @@
 <?php
 require_once 'mydatabase.php';
 
-if (isset($_POST['id'])) {
-$id = $_POST['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-$servername = "db";
-$username = "myuser";
-$password = "mypassword";
-$dbname = "mydatabase";
+    $servername = "db";
+    $username = "myuser";
+    $password = "mypassword";
+    $dbname = "mydatabase";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-die("Conexión fallida: " . $conn->connect_error);
-}
+    $sql = "DELETE FROM stores WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    if ($stmt->execute()) {
 
-$sql = "DELETE FROM cities WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
+    } else {
+        echo "Error al eliminar la tienda: " . $conn->error;
+    }
 
-if ($stmt->execute()) {
-echo "Comanda eliminada exitosamente.<br>";
+    $stmt->close();
 } else {
-echo "Error al eliminar la comanda: " . $conn->error . "<br>";
+    echo "No se ha especificado una tienda para eliminar.";
 }
 
-$stmt->close();
 $conn->close();
+?>
 
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación de Eliminación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .message-box {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+        .message-box a {
+            text-decoration: none;
+            color: #155724;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="message-box">
+    <h2>¡Tu tienda ha sido eliminada exitosamente!</h2>
+    <a href="index.php">Volver</a>
+</div>
+</body>
+</html>
