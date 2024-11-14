@@ -7,7 +7,7 @@ $dbname = "mydatabase";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Obtener las tiendas de la base de datos
-$query = "SELECT stores.id, cities.name AS city, stores.email, stores.phone 
+$query = "SELECT stores.id, cities.name AS city, stores.address, stores.email, stores.phone 
           FROM stores
           INNER JOIN cities ON stores.city = cities.id;";
 $result = $conn->query($query);
@@ -16,7 +16,6 @@ if (!$result) {
     die("Error en la consulta: " . $conn->error);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -84,25 +83,30 @@ if (!$result) {
             background-color: #ddd;
         }
 
-        /* Estilo para las acciones de la tabla */
-        td a {
-            text-decoration: none;
-            color: #2196F3;
-            margin-right: 10px;
+        /* Estilo para los botones fuera de la tabla */
+        .acciones {
+            text-align: center;
+            margin: 20px;
         }
 
-        td a:hover {
-            color: #0b7dda;
+        .acciones a {
+            background-color: #2196F3;
+        }
+
+        .acciones a.eliminar {
+            background-color: #f44336;
         }
     </style>
 </head>
 <body>
 <h1>Lista de Tiendas</h1>
 
-<!-- Botón para crear una nueva tienda -->
-<a href="create_store.php">Crear Nueva Tienda</a>
+<!-- Botones de acción en la parte superior -->
+<div class="acciones">
+    <a href="create_store.php">Crear Nueva Tienda</a>
+</div>
 
-<!-- Tabla de tiendas -->
+<!-- Tabla de tiendas sin columna de acciones -->
 <table border="1">
     <thead>
     <tr>
@@ -111,25 +115,32 @@ if (!$result) {
         <th>Dirección</th>
         <th>Email</th>
         <th>Teléfono</th>
-        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
-    <?php while ($row = $result->fetch_assoc()): ?>
-        <tr>
-            <td><?php echo $row['id']; ?></td>
-            <td><?php echo htmlspecialchars($row['city']); ?></td>
-            <td><?php echo htmlspecialchars($row['address']);?></td>
-            <td><?php echo htmlspecialchars($row['email']); ?></td>
-            <td><?php echo htmlspecialchars($row['phone']); ?></td>
-            <td>
-                <a href="update_store.php?id=<?php echo $row['id']; ?>">Actualizar</a>
-                <a href="deleteTable.php?id=<?php echo $row['id']; ?>">Eliminar</a>
-            </td>
-        </tr>
-    <?php endwhile; ?>
+    <?php
+    // Obtener todas las tiendas
+    $stores = $result->fetch_all(MYSQLI_ASSOC);  // Obtenemos todos los registros en un array
+
+    // Mostrar las tiendas en la tabla
+    foreach ($stores as $row) {
+        echo '<tr>';
+        echo '<td>' . $row['id'] . '</td>';
+        echo '<td>' . htmlspecialchars($row['city']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['address']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['email']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['phone']) . '</td>';
+        echo '</tr>';
+    }
+    ?>
     </tbody>
 </table>
+
+<!-- Botones de acción fuera de la tabla (sin relación con los valores de la tabla) -->
+<div class="acciones">
+    <a href="update_store.php">Actualizar Tienda</a>
+    <a href="deleteTable.php">Eliminar Tienda</a>
+</div>
 
 <?php $conn->close(); ?>
 </body>
