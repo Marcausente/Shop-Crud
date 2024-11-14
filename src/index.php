@@ -138,7 +138,7 @@ if (!$result) {
 
 <!-- Botones de acción fuera de la tabla (sin relación con los valores de la tabla) -->
 <div class="acciones">
-    <a href="update_store.php">Actualizar Tienda</a>
+    <a href="updateTable.php">Actualizar Tienda</a>
     <a href="deleteTable.php">Eliminar Tienda</a>
 </div>
 
