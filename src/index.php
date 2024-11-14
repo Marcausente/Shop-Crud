@@ -108,6 +108,7 @@ if (!$result) {
     <tr>
         <th>ID</th>
         <th>Ciudad</th>
+        <th>Dirección</th>
         <th>Email</th>
         <th>Teléfono</th>
         <th>Acciones</th>
@@ -118,6 +119,7 @@ if (!$result) {
         <tr>
             <td><?php echo $row['id']; ?></td>
             <td><?php echo htmlspecialchars($row['city']); ?></td>
+            <td><?php echo htmlspecialchars($row['address']);?></td>
             <td><?php echo htmlspecialchars($row['email']); ?></td>
             <td><?php echo htmlspecialchars($row['phone']); ?></td>
             <td>
