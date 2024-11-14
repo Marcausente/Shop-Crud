@@ -47,7 +47,7 @@ $sqlStores = "CREATE TABLE IF NOT EXISTS stores (
     email VARCHAR(100),
     opening_time TIME,
     closing_time TIME,
-    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    last_update TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NULL,
     FOREIGN KEY (city) REFERENCES cities(id) ON DELETE CASCADE
 )";
 if ($conn->query($sqlStores) === true) {
@@ -65,6 +65,48 @@ $sqlStoresItems = "CREATE TABLE IF NOT EXISTS StoresItems (
     FOREIGN KEY (id_store) REFERENCES stores(id) ON DELETE CASCADE,
     FOREIGN KEY (id_item) REFERENCES FoodDrinkNoExpendeable(id) ON DELETE CASCADE
 )";
+
+// Insertar Madrid solo si no existe
+$sqlCheckMadrid = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Madrid'";
+$result = $conn->query($sqlCheckMadrid);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertMadrid = "INSERT INTO cities (id, name) VALUES (1, 'Madrid')";
+    if ($conn->query($sqlInsertMadrid) === true) {
+        echo "Ciudad Madrid insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Madrid: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Barcelona solo si no existe
+$sqlCheckBarcelona = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Barcelona'";
+$result = $conn->query($sqlCheckBarcelona);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertBarcelona = "INSERT INTO cities (id, name) VALUES (2, 'Barcelona')";
+    if ($conn->query($sqlInsertBarcelona) === true) {
+        echo "Ciudad Barcelona insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Barcelona: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Marbella solo si no existe
+$sqlCheckMarbella = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Marbella'";
+$result = $conn->query($sqlCheckMarbella);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertMarbella = "INSERT INTO cities (id, name) VALUES (3, 'Marbella')";
+    if ($conn->query($sqlInsertMarbella) === true) {
+        echo "Ciudad Marbella insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Marbella: " . $conn->error . "<br>";
+    }
+}
 
 if ($conn->query($sqlStoresItems) === true) {
     echo "Tabla Stores_Items creada exitosamente.<br>";
