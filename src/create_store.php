@@ -1,5 +1,6 @@
 <?php
 require_once 'mydatabase.php'; // Incluir conexión a la base de datos
+require_once "store.php";
 
 $servername = "db";
 $username = "myuser";
@@ -22,22 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Por favor complete todos los campos.");
     }
 
-    // Obtener los datos del formulario
-    $city = $_POST['city'];
-    $address = $_POST['address'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $opening_time = $_POST['opening_time'];
-    $closing_time = $_POST['closing_time'];
+    // Crear un objeto Store con los datos del formulario
+    $store = new Store(
+        $_POST['city'],
+        $_POST['address'],
+        $_POST['phone'],
+        $_POST['email'],
+        $_POST['opening_time'],
+        $_POST['closing_time']
+    );
 
-    // Insertar los datos en la base de datos
-    $insertar_datos = "INSERT INTO stores (city, address, phone, email, opening_time, closing_time) 
-    VALUES ('$city', '$address', '$phone', '$email', '$opening_time', '$closing_time')";
-
-    if (mysqli_query($conn, $insertar_datos)) {
+    if ($store->saveToDatabase($conn)) {
         echo "Datos insertados correctamente";
     } else {
-        echo "Error al insertar los datos: " . mysqli_error($conn);
+        echo "Error al insertar los datos: " . $conn->error;
     }
 }
 ?>
