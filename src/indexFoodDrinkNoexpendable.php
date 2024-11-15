@@ -109,7 +109,7 @@ if (!$result) {
 
 <!-- Botón de acción para agregar un nuevo producto -->
 <div class="acciones">
-    <a href="create_food_drink.php">Crear Nuevo Producto</a>
+    <a href="create_store_food.php">Crear Nuevo Producto</a>
 </div>
 
 <div class="acciones">
