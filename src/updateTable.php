@@ -129,7 +129,28 @@ if (isset($_POST['id'])) {
             <h2>Actualizar información de la tienda</h2>
             <form method="POST" action="updateTable.php">
                 <input type="number" name="id" placeholder="ID de la tienda" required><br>
-                <input type="text" name="city" placeholder="Nueva ciudad" required><br>
+                 <label for="city">Ciudad:</label>
+    <select id="city" name="city" required>
+        <option value="1">Madrid</option>
+        <option value="2">Barcelona</option>
+        <option value="3">Marbella</option>
+        <option value="4">Valencia</option>
+        <option value="6">Sevilla</option>
+        <option value="7">Zaragoza</option>
+        <option value="8">Malaga</option>
+        <option value="9">Alicante</option>
+        <option value="10">Cordoba</option>
+        <option value="11">Valladolid</option>
+        <option value="12">Bilbao</option>
+        <option value="13">Palma</option>
+        <option value="14">Murcia</option>
+        <option value="15">Salamanca</option>
+        <option value="16">Granada</option>
+        <option value="17">Oviedo</option>
+        <option value="18">Logroño</option>
+        <option value="19">Girona</option>
+        <option value="20">Toledo</option>
+    </select>
                 <input type="email" name="email" placeholder="Nuevo email" required><br>
                 <input type="text" name="phone" placeholder="Nuevo teléfono" required><br>
                 <input type="text" name="address" placeholder="Nueva dirección" required><br>
