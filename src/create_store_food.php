@@ -1,5 +1,6 @@
 <?php
 require_once 'mydatabase.php'; // Incluye la conexión a la base de datos
+require_once 'FoodDrinkNoExpendeable.php';
 
 $servername = "db";
 $username = "myuser";
@@ -22,21 +23,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Por favor complete todos los campos obligatorios.");
     }
 
-    // Obtener y sanitizar los datos del formulario
-    $name = $_POST['name'];
-    $category = $_POST['category'];
-    $price = $_POST['price'];
     $is_perishable = isset($_POST['is_perishable']) ? 1 : 0;
     $expiration_date = !empty($_POST['expiration_date']) ? $_POST['expiration_date'] : NULL;
 
-    // Insertar los datos en la base de datos
-    $insert_item = "INSERT INTO FoodDrinkNoExpendeable (name, category, price, is_perishable, expiration_date) 
-                    VALUES ('$name', '$category', '$price', '$is_perishable', '$expiration_date')";
+    $item = new FoodDrinkNoExpendeable(
+        $_POST['name'],
+        $_POST['category'],
+        $_POST['price'],
+        $is_perishable,
+        $expiration_date
+    );
 
-    if ($conn->query($insert_item) === true) {
-        echo "Producto insertado correctamente.";
-    } else {
-        echo "Error al insertar el producto: " . $conn->error;
+    // Insertar los datos en la base de datos
+    if($item->saveToDatabase($conn)){
+        echo "Se ha creado un nuevo producto.";
+    }else{
+        echo "No se ha podido crear el producto.";
     }
 }
 
@@ -108,7 +110,7 @@ $conn->close();
 <body>
 
 <h2>Formulario de Registro de Productos</h2>
-<form action="create_item.php" method="POST">
+<form action="create_store_food.php" method="POST">
     <label for="name">Nombre del Producto:</label>
     <input type="text" id="name" name="name" required>
 
@@ -128,8 +130,9 @@ $conn->close();
     <label for="expiration_date">Fecha de Caducidad:</label>
     <input type="date" id="expiration_date" name="expiration_date">
 
-    <input type="submit" value="Registrar Producto">
-    <a href="indexFoodDrinkNoexpendable.php.php" class="boton">Volver</a></form>
+    <input type="submit" value="Enviar">
 
+    <a href="indexFoodDrinkNoexpendable.php" class="boton">Volver</a>
+</form>
 </body>
 </html>
