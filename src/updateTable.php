@@ -38,25 +38,34 @@ if (isset($_POST['id'])) {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    height: 100vh;
-                    background-color: #f4f4f9;
+                    min-height: 100vh;
+                    margin: 0;
+                    background-color: #f9f9f9;
                 }
                 .message-box {
-                    background-color: #d4edda;
-                    border: 1px solid #c3e6cb;
-                    color: #155724;
+                    background-color: #e9ffe9;
+                    border: 1px solid #8ee88e;
+                    color: #2e7d32;
                     padding: 20px;
-                    border-radius: 8px;
-                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 10px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
                     text-align: center;
-                    width: 300px;
+                    max-width: 400px;
+                    width: 90%;
                 }
                 .message-box a {
-                    text-decoration: none;
-                    color: #155724;
-                    font-weight: bold;
-                    margin-top: 10px;
                     display: inline-block;
+                    margin-top: 15px;
+                    padding: 10px 20px;
+                    background-color: #2e7d32;
+                    color: white;
+                    text-decoration: none;
+                    font-weight: bold;
+                    border-radius: 5px;
+                    transition: background-color 0.3s;
+                }
+                .message-box a:hover {
+                    background-color: #25662b;
                 }
             </style>
         </head>
@@ -88,39 +97,54 @@ if (isset($_POST['id'])) {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 100vh;
-                background-color: #f4f4f9;
+                min-height: 100vh;
+                margin: 0;
+                background-color: #f9f9f9;
             }
             .form-box {
-                background-color: #fff3cd;
-                border: 1px solid #ffeeba;
-                color: #856404;
+                background-color: #fff8e1;
+                border: 1px solid #ffd54f;
                 padding: 20px;
-                border-radius: 8px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
                 text-align: center;
-                width: 320px;
+                max-width: 400px;
+                width: 90%;
             }
-            .form-box input {
-                padding: 10px 20px 10px 10px; /* Agregar más padding a la derecha */
-                font-size: 14px;
-                margin-bottom: 10px;
+            .form-box h2 {
+                color: #ff8f00;
+                margin-bottom: 20px;
+            }
+            .form-box input,
+            .form-box select {
                 width: 100%;
-                border-radius: 4px;
-                border: 1px solid #ccc;
-                box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                font-size: 14px;
+                box-sizing: border-box;
             }
             .form-box button {
-                padding: 10px 20px;
-                background-color: #007bff;
+                width: 100%;
+                padding: 10px;
+                background-color: #ff8f00;
                 color: white;
                 border: none;
-                border-radius: 4px;
-                cursor: pointer;
+                border-radius: 5px;
                 font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
             }
             .form-box button:hover {
-                background-color: #0056b3;
+                background-color: #ff6f00;
+            }
+            .form-box a {
+                display: inline-block;
+                margin-top: 10px;
+                text-decoration: none;
+                color: #ff8f00;
+                font-weight: bold;
             }
         </style>
     </head>
@@ -128,35 +152,34 @@ if (isset($_POST['id'])) {
         <div class="form-box">
             <h2>Actualizar información de la tienda</h2>
             <form method="POST" action="updateTable.php">
-                <input type="number" name="id" placeholder="ID de la tienda" required><br>
-                 <label for="city">Ciudad:</label>
-    <select id="city" name="city" required>
-        <option value="1">Madrid</option>
-        <option value="2">Barcelona</option>
-        <option value="3">Marbella</option>
-        <option value="4">Valencia</option>
-        <option value="6">Sevilla</option>
-        <option value="7">Zaragoza</option>
-        <option value="8">Malaga</option>
-        <option value="9">Alicante</option>
-        <option value="10">Cordoba</option>
-        <option value="11">Valladolid</option>
-        <option value="12">Bilbao</option>
-        <option value="13">Palma</option>
-        <option value="14">Murcia</option>
-        <option value="15">Salamanca</option>
-        <option value="16">Granada</option>
-        <option value="17">Oviedo</option>
-        <option value="18">Logroño</option>
-        <option value="19">Girona</option>
-        <option value="20">Toledo</option>
-    </select>
-                <input type="email" name="email" placeholder="Nuevo email" required><br>
-                <input type="text" name="phone" placeholder="Nuevo teléfono" required><br>
-                <input type="text" name="address" placeholder="Nueva dirección" required><br>
+                <input type="number" name="id" placeholder="ID de la tienda" required>
+                <label for="city">Ciudad:</label>
+                <select id="city" name="city" required>
+                    <option value="1">Madrid</option>
+                    <option value="2">Barcelona</option>
+                    <option value="3">Marbella</option>
+                    <option value="4">Valencia</option>
+                    <option value="6">Sevilla</option>
+                    <option value="7">Zaragoza</option>
+                    <option value="8">Málaga</option>
+                    <option value="9">Alicante</option>
+                    <option value="10">Córdoba</option>
+                    <option value="11">Valladolid</option>
+                    <option value="12">Bilbao</option>
+                    <option value="13">Palma</option>
+                    <option value="14">Murcia</option>
+                    <option value="15">Salamanca</option>
+                    <option value="16">Granada</option>
+                    <option value="17">Oviedo</option>
+                    <option value="18">Logroño</option>
+                    <option value="19">Girona</option>
+                    <option value="20">Toledo</option>
+                </select>
+                <input type="email" name="email" placeholder="Nuevo email" required>
+                <input type="text" name="phone" placeholder="Nuevo teléfono" required>
+                <input type="text" name="address" placeholder="Nueva dirección" required>
                 <button type="submit">Actualizar Tienda</button>
             </form>
-            <br>
             <a href="index.php">Volver al listado de tiendas</a>
         </div>
     </body>

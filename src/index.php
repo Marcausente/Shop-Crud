@@ -96,6 +96,15 @@ if (!$result) {
         .acciones a.eliminar {
             background-color: #f44336;
         }
+
+        /* Estilo específico para el botón de actualizar tienda */
+        .acciones a.actualizar {
+            background-color: #ff9800; /* Naranja */
+        }
+
+        .acciones a.actualizar:hover {
+            background-color: #fb8c00; /* Naranja más oscuro */
+        }
     </style>
 </head>
 <body>
@@ -142,8 +151,8 @@ if (!$result) {
 
 <!-- Botones de acción fuera de la tabla (sin relación con los valores de la tabla) -->
 <div class="acciones">
-    <a href="updateTable.php">Actualizar Tienda</a>
-    <a href="deleteTable.php">Eliminar Tienda</a>
+    <a href="updateTable.php" class="actualizar">Actualizar Tienda</a>
+    <a href="deleteTable.php" class="eliminar">Eliminar Tienda</a>
 </div>
 
 <?php $conn->close(); ?>
