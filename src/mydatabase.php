@@ -173,7 +173,6 @@ if ($row['count'] == 0) {
     }
 }
 
-// Insertar Córdoba solo si no existe
 $sqlCheckCordoba = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Córdoba'";
 $result = $conn->query($sqlCheckCordoba);
 $row = $result->fetch_assoc();
