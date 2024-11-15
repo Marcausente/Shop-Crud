@@ -108,6 +108,224 @@ if ($row['count'] == 0) {
     }
 }
 
+$sqlCheckValencia = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Valencia'";
+$result = $conn->query($sqlCheckValencia);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertValencia = "INSERT INTO cities (id, name) VALUES (4, 'Valencia')";
+    if ($conn->query($sqlInsertValencia) === true) {
+        echo "Ciudad Valencia insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Valencia: " . $conn->error . "<br>";
+    }
+}
+$sqlCheckSevilla = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Sevilla'";
+$result = $conn->query($sqlCheckSevilla);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertSevilla = "INSERT INTO cities (id, name) VALUES (6, 'Sevilla')";
+    if ($conn->query($sqlInsertSevilla) === true) {
+        echo "Ciudad Sevilla insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Sevilla: " . $conn->error . "<br>";
+    }
+}
+$sqlCheckZaragoza = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Zaragoza'";
+$result = $conn->query($sqlCheckZaragoza);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertZaragoza = "INSERT INTO cities (id, name) VALUES (7, 'Zaragoza')";
+    if ($conn->query($sqlInsertZaragoza) === true) {
+        echo "Ciudad Zaragoza insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Zaragoza: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Málaga solo si no existe
+$sqlCheckMalaga = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Málaga'";
+$result = $conn->query($sqlCheckMalaga);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertMalaga = "INSERT INTO cities (id, name) VALUES (8, 'Málaga')";
+    if ($conn->query($sqlInsertMalaga) === true) {
+        echo "Ciudad Málaga insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Málaga: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Alicante solo si no existe
+$sqlCheckAlicante = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Alicante'";
+$result = $conn->query($sqlCheckAlicante);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertAlicante = "INSERT INTO cities (id, name) VALUES (9, 'Alicante')";
+    if ($conn->query($sqlInsertAlicante) === true) {
+        echo "Ciudad Alicante insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Alicante: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Córdoba solo si no existe
+$sqlCheckCordoba = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Córdoba'";
+$result = $conn->query($sqlCheckCordoba);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertCordoba = "INSERT INTO cities (id, name) VALUES (10, 'Córdoba')";
+    if ($conn->query($sqlInsertCordoba) === true) {
+        echo "Ciudad Córdoba insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Córdoba: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Valladolid solo si no existe
+$sqlCheckValladolid = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Valladolid'";
+$result = $conn->query($sqlCheckValladolid);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertValladolid = "INSERT INTO cities (id, name) VALUES (11, 'Valladolid')";
+    if ($conn->query($sqlInsertValladolid) === true) {
+        echo "Ciudad Valladolid insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Valladolid: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Bilbao solo si no existe
+$sqlCheckBilbao = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Bilbao'";
+$result = $conn->query($sqlCheckBilbao);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertBilbao = "INSERT INTO cities (id, name) VALUES (12, 'Bilbao')";
+    if ($conn->query($sqlInsertBilbao) === true) {
+        echo "Ciudad Bilbao insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Bilbao: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Palma solo si no existe
+$sqlCheckPalma = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Palma'";
+$result = $conn->query($sqlCheckPalma);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertPalma = "INSERT INTO cities (id, name) VALUES (13, 'Palma')";
+    if ($conn->query($sqlInsertPalma) === true) {
+        echo "Ciudad Palma insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Palma: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Murcia solo si no existe
+$sqlCheckMurcia = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Murcia'";
+$result = $conn->query($sqlCheckMurcia);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertMurcia = "INSERT INTO cities (id, name) VALUES (14, 'Murcia')";
+    if ($conn->query($sqlInsertMurcia) === true) {
+        echo "Ciudad Murcia insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Murcia: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Salamanca solo si no existe
+$sqlCheckSalamanca = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Salamanca'";
+$result = $conn->query($sqlCheckSalamanca);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertSalamanca = "INSERT INTO cities (id, name) VALUES (15, 'Salamanca')";
+    if ($conn->query($sqlInsertSalamanca) === true) {
+        echo "Ciudad Salamanca insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Salamanca: " . $conn->error . "<br>";
+    }
+}
+// Insertar Granada solo si no existe
+$sqlCheckGranada = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Granada'";
+$result = $conn->query($sqlCheckGranada);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertGranada = "INSERT INTO cities (id, name) VALUES (16, 'Granada')";
+    if ($conn->query($sqlInsertGranada) === true) {
+        echo "Ciudad Granada insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Granada: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Oviedo solo si no existe
+$sqlCheckOviedo = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Oviedo'";
+$result = $conn->query($sqlCheckOviedo);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertOviedo = "INSERT INTO cities (id, name) VALUES (17, 'Oviedo')";
+    if ($conn->query($sqlInsertOviedo) === true) {
+        echo "Ciudad Oviedo insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Oviedo: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Logroño solo si no existe
+$sqlCheckLogrono = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Logroño'";
+$result = $conn->query($sqlCheckLogrono);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertLogrono = "INSERT INTO cities (id, name) VALUES (18, 'Logroño')";
+    if ($conn->query($sqlInsertLogrono) === true) {
+        echo "Ciudad Logroño insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Logroño: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Girona solo si no existe
+$sqlCheckGirona = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Girona'";
+$result = $conn->query($sqlCheckGirona);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertGirona = "INSERT INTO cities (id, name) VALUES (19, 'Girona')";
+    if ($conn->query($sqlInsertGirona) === true) {
+        echo "Ciudad Girona insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Girona: " . $conn->error . "<br>";
+    }
+}
+
+// Insertar Toledo solo si no existe
+$sqlCheckToledo = "SELECT COUNT(*) AS count FROM cities WHERE name = 'Toledo'";
+$result = $conn->query($sqlCheckToledo);
+$row = $result->fetch_assoc();
+
+if ($row['count'] == 0) {
+    $sqlInsertToledo = "INSERT INTO cities (id, name) VALUES (20, 'Toledo')";
+    if ($conn->query($sqlInsertToledo) === true) {
+        echo "Ciudad Toledo insertada exitosamente.<br>";
+    } else {
+        echo "Error al insertar Toledo: " . $conn->error . "<br>";
+    }
+}
+
 if ($conn->query($sqlStoresItems) === true) {
    // echo "Tabla Stores_Items creada exitosamente.<br>";
 } else {

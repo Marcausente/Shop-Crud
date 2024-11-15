@@ -5,7 +5,6 @@ require_once 'mydatabase.php'; // Incluir la conexión a la base de datos
 if (isset($_POST['id'])) {
     $id = $_POST['id']; // Obtener el ID enviado por el formulario
 
-    // Conexión a la base de datos
     $servername = "db";
     $username = "myuser";
     $password = "mypassword";
@@ -13,19 +12,15 @@ if (isset($_POST['id'])) {
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verificar la conexión
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Preparar la consulta para eliminar la tienda con el ID especificado
     $sql = "DELETE FROM stores WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
 
-    // Ejecutar la consulta de eliminación
     if ($stmt->execute()) {
-        // Mostrar mensaje de éxito si la tienda se eliminó
         echo '
         <!DOCTYPE html>
         <html lang="es">
@@ -69,15 +64,14 @@ if (isset($_POST['id'])) {
         </body>
         </html>
         ';
-        exit(); // Detener la ejecución del script
+        exit();
     } else {
         echo "Error al eliminar la tienda: " . $conn->error;
     }
 
-    $stmt->close(); // Cerrar la declaración
-    $conn->close(); // Cerrar la conexión
+    $stmt->close();
+    $conn->close();
 } else {
-    // Mostrar formulario si no se ha enviado el ID
     echo '
     <!DOCTYPE html>
     <html lang="es">
@@ -102,15 +96,16 @@ if (isset($_POST['id'])) {
                 border-radius: 8px;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 text-align: center;
-                width: 300px;
+                width: 320px;
             }
             .form-box input {
-                padding: 10px;
+                padding: 10px 20px 10px 10px; /* Más espacio a la derecha */
                 font-size: 14px;
                 margin-bottom: 10px;
                 width: 100%;
                 border-radius: 4px;
                 border: 1px solid #ccc;
+                box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
             }
             .form-box button {
                 padding: 10px 20px;

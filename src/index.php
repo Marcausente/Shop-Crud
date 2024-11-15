@@ -106,6 +106,10 @@ if (!$result) {
     <a href="create_store.php">Crear Nueva Tienda</a>
 </div>
 
+<div class="acciones">
+    <a href="indexFoodDrinkNoexpendable.php">Ver index Food Drink</a>
+</div>
+
 <!-- Tabla de tiendas sin columna de acciones -->
 <table border="1">
     <thead>

@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #444;
         }
 
-        /* Estilo para el título */
+        /* Título */
         h1 {
             font-size: 2rem;
             color: #333;
@@ -81,22 +81,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             max-width: 350px; /* Ajustar el ancho del formulario */
         }
 
-        /* Estilo de las etiquetas */
+        /* Estilo de las etiquetas y campos de entrada */
         label {
             display: block;
-            font-size: 0.9rem; /* Reducir tamaño de texto */
+            font-size: 0.9rem;
             color: #666;
             margin-bottom: 6px;
         }
 
-        /* Estilo para los campos de entrada */
         input[type="text"],
         input[type="email"],
         input[type="time"],
         select {
-            width: 100%;
+            width: calc(100% - 20px); /* Ajustar el ancho para ocupar menos espacio horizontal */
             padding: 10px;
-            margin-bottom: 15px; /* Reducir espacio entre campos */
+            margin-bottom: 15px;
             border: 2px solid #ddd;
             border-radius: 6px;
             background-color: #f9f9f9;
@@ -112,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             outline: none;
         }
 
-        /* Estilo para el botón de envío */
+        /* Botón de envío */
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -134,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             display: block;
             text-align: center;
             color: #2196F3;
-            margin-top: 15px; /* Reducir espacio */
+            margin-top: 15px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
@@ -148,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #bbdefb;
         }
 
-        /* Estilo para mensajes (error, éxito, etc.) */
+        /* Mensajes (error, éxito, etc.) */
         .mensaje {
             color: #d32f2f;
             text-align: center;
@@ -159,33 +158,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <h1>Formulario de Datos de Tienda</h1>
 <form action="create_store.php" method="POST">
-    <label for="city">Ciudad:</label><br>
+    <label for="city">Ciudad:</label>
     <select id="city" name="city" required>
         <option value="1">Madrid</option>
         <option value="2">Barcelona</option>
         <option value="3">Marbella</option>
-        <!-- Aquí deberías cargar las ciudades dinámicamente desde la base de datos -->
-    </select><br><br>
+        <option value="4"></option>
+        <!-- Cargar dinámicamente las ciudades desde la base de datos -->
+    </select>
 
-    <label for="address">Dirección:</label><br>
-    <input type="text" id="address" name="address" required><br><br>
+    <label for="address">Dirección:</label>
+    <input type="text" id="address" name="address" required>
 
-    <label for="phone">Teléfono:</label><br>
-    <input type="text" id="phone" name="phone" required><br><br>
+    <label for="phone">Teléfono:</label>
+    <input type="text" id="phone" name="phone" required>
 
-    <label for="email">Correo electrónico:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" required>
 
-    <label for="opening_time">Hora de apertura:</label><br>
-    <input type="time" id="opening_time" name="opening_time" required><br><br>
+    <label for="opening_time">Hora de apertura:</label>
+    <input type="time" id="opening_time" name="opening_time" required>
 
-    <label for="closing_time">Hora de cierre:</label><br>
-    <input type="time" id="closing_time" name="closing_time" required><br><br>
+    <label for="closing_time">Hora de cierre:</label>
+    <input type="time" id="closing_time" name="closing_time" required>
 
     <input type="submit" value="Enviar">
 
     <a href="index.php" class="boton">Volver</a>
-
 </form>
 </body>
 </html>
+
