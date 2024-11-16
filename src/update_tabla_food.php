@@ -152,32 +152,18 @@ if (isset($_POST['id'])) {
         <div class="form-box">
             <h2>Actualizar información del producto</h2>
             <form method="POST" action="updateTable.php">
-                <input type="number" name="id" placeholder="ID de la tienda" required>
-                <label for="city">Ciudad:</label>
-                <select id="city" name="city" required>
-                    <option value="1">Madrid</option>
-                    <option value="2">Barcelona</option>
-                    <option value="3">Marbella</option>
-                    <option value="4">Valencia</option>
-                    <option value="6">Sevilla</option>
-                    <option value="7">Zaragoza</option>
-                    <option value="8">Málaga</option>
-                    <option value="9">Alicante</option>
-                    <option value="10">Córdoba</option>
-                    <option value="11">Valladolid</option>
-                    <option value="12">Bilbao</option>
-                    <option value="13">Palma</option>
-                    <option value="14">Murcia</option>
-                    <option value="15">Salamanca</option>
-                    <option value="16">Granada</option>
-                    <option value="17">Oviedo</option>
-                    <option value="18">Logroño</option>
-                    <option value="19">Girona</option>
-                    <option value="20">Toledo</option>
+                <input type="number" name="id" placeholder="ID del producto" required>
+                <label for="type">Precio:</label>
+                <select id="type" name="type" required>
+                    <option value="Food">Food</option>
+                    <option value="Drink">Drink</option>
+                    <option value="NoExpendeable">No Expendeable</option>
                 </select>
-                <input type="email" name="email" placeholder="Nuevo email" required>
-                <input type="text" name="phone" placeholder="Nuevo teléfono" required>
-                <input type="text" name="address" placeholder="Nueva dirección" required>
+                <input type="number" name="price" placeholder="Nuevo precio" required>
+                <label for="is_perishable">¿Es perecedero?</label>
+                <input type="checkbox" id="is_perishable" name="is_perishable">
+                <label for="caducidad">Nueva caducidad:</label>
+                <input type="date" name="caducidad" placeholder="Fecha de caducidad" required>
                 <button type="submit">Actualizar Tienda</button>
             </form>
             <a href="indexFoodDrinkNoexpendable.php">Volver al listado de productos</a>
