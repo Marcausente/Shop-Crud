@@ -18,7 +18,7 @@ class FoodDrinkNoExpendeable
 
     public function saveToDatabase($conn){
         $insertarDatos = $conn->prepare("INSERT INTO FoodDrinkNoExpendeable (name, category, price, is_perishable, expiration_date) VALUES (?, ?, ?, ?, ?)");
-        $insertarDatos->bind_param("ssdis", $this->name, $this->category, $this->price, $this->is_perishable, $this->expiration_date); //s son strings, d decimales, i int
+        $insertarDatos->bind_param("ssdis", $this->name, $this->category, $this->price, $this->is_perishable, $this->expiration_date); //s son strings, d decimales, i inta
         return $insertarDatos->execute();
     }
 }

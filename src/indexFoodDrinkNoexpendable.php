@@ -137,11 +137,11 @@ if (!$result) {
     foreach ($products as $row) {
         echo '<tr>';
         echo '<td>' . $row['id'] . '</td>';
-        echo '<td>' . htmlspecialchars($row['name']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['category']) . '</td>';
-        echo '<td>' . htmlspecialchars($row['price']) . '</td>';
+        echo '<td>' . htmlspecialchars(isset($row['name']) ? $row['name'] : '') . '</td>';
+        echo '<td>' . htmlspecialchars(isset($row['category']) ? $row['category'] : '') . '</td>';
+        echo '<td>' . htmlspecialchars(isset($row['price']) ? $row['price'] : '') . '</td>';
         echo '<td>' . ($row['is_perishable'] ? 'Sí' : 'No') . '</td>';
-        echo '<td>' . htmlspecialchars($row['expiration_date']) . '</td>';
+        echo '<td>' . htmlspecialchars(isset($row['expiration_date']) ? $row['expiration_date'] : '') . '</td>';
         echo '</tr>';
     }
     ?>
