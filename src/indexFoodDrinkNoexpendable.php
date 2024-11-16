@@ -102,6 +102,10 @@ if (!$result) {
         .acciones a.eliminar {
             background-color: #f44336;
         }
+
+        .acciones a.actualizar {
+            background-color: #ff9800;
+        }
     </style>
 </head>
 <body>
@@ -150,8 +154,8 @@ if (!$result) {
 
 <!-- Botones de acción fuera de la tabla -->
 <div class="acciones">
-    <a href="update_food_drink.php">Actualizar Producto</a>
-    <a href="delete_food_drink.php" class="eliminar">Eliminar Producto</a>
+    <a href="update_tabla_food.php" class="actualizar">Actualizar Producto</a>
+    <a href="delete_tabla_food.php" class="eliminar">Eliminar Producto</a>
 </div>
 
 <?php $conn->close(); ?>

@@ -99,7 +99,7 @@ if (!$result) {
 
         /* Estilo específico para el botón de actualizar tienda */
         .acciones a.actualizar {
-            background-color: #ff9800; /* Naranja */
+            background-color: #ff9800;
         }
 
         .acciones a.actualizar:hover {
