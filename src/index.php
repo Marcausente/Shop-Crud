@@ -1,12 +1,8 @@
 <?php
 require_once 'mydatabase.php'; // Incluir conexión a la base de datos
-$servername = "db";
-$username = "myuser";
-$password = "mypassword";
-$dbname = "mydatabase";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Obtener las tiendas de la base de datos
+$conn = Database::getInstance()->getConnection();
+
 $query = "SELECT stores.id, cities.name AS city, stores.address, stores.email, stores.phone 
           FROM stores
           INNER JOIN cities ON stores.city = cities.id;";

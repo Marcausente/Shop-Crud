@@ -10,14 +10,14 @@ if (isset($_POST['id'])) {
     $phone = $_POST['phone'];
     $address = $_POST['address'];
 
-    $servername = "db";
-    $username = "myuser";
-    $password = "mypassword";
-    $dbname = "mydatabase";
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = Database::getInstance()->getConnection();
 
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
     $sql = "UPDATE stores SET city = ?, email = ?, phone = ?, address = ? WHERE id = ?";
@@ -186,4 +186,3 @@ if (isset($_POST['id'])) {
     </html>
     ';
 }
-?>

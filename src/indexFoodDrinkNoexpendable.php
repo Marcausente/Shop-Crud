@@ -1,18 +1,7 @@
 <?php
 require_once 'mydatabase.php'; // Incluir conexión a la base de datos
 
-$servername = "db";
-$username = "myuser";
-$password = "mypassword";
-$dbname = "mydatabase";
-
-// Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+$conn = Database::getInstance()->getConnection();
 
 // Obtener los productos de la tabla FoodDrinkNoExpendeable
 $query = "SELECT id, name, category, price, is_perishable, expiration_date FROM FoodDrinkNoExpendeable;";
@@ -156,6 +145,7 @@ if (!$result) {
 <div class="acciones">
     <a href="update_tabla_food.php" class="actualizar">Actualizar Producto</a>
     <a href="delete_tabla_food.php" class="eliminar">Eliminar Producto</a>
+    <a href="stock.php" class="stock">Ver Stock</a>
 </div>
 
 <?php $conn->close(); ?>

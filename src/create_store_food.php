@@ -2,29 +2,17 @@
 require_once 'mydatabase.php'; // Incluye la conexión a la base de datos
 require_once 'FoodDrinkNoExpendeable.php';
 
-$servername = "db";
-$username = "myuser";
-$password = "mypassword";
-$dbname = "mydatabase";
-
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+$conn = Database::getInstance()->getConnection();
 
 // Comprobar si los datos han sido enviados a través del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Verificar que todos los campos obligatorios están completos
     if (empty($_POST['name']) || empty($_POST['category']) || empty($_POST['price'])) {
         die("Por favor complete todos los campos obligatorios.");
     }
 
     $is_perishable = isset($_POST['is_perishable']) ? 1 : 0;
-    $expiration_date = !empty($_POST['expiration_date']) ? $_POST['expiration_date'] : NULL;
+    $expiration_date = !empty($_POST['expiration_date']) ? $_POST['expiration_date'] : null;
 
     $item = new FoodDrinkNoExpendeable(
         $_POST['name'],
@@ -34,10 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $expiration_date
     );
 
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
     // Insertar los datos en la base de datos
-    if($item->saveToDatabase($conn)){
+    if ($item->saveToDatabase($conn)) {
         echo "Se ha creado un nuevo producto.";
-    }else{
+    } else {
         echo "No se ha podido crear el producto.";
     }
 }

@@ -5,15 +5,14 @@ require_once 'mydatabase.php'; // Incluir la conexión a la base de datos
 if (isset($_POST['id'])) {
     $id = $_POST['id']; // Obtener el ID enviado por el formulario
 
-    $servername = "db";
-    $username = "myuser";
-    $password = "mypassword";
-    $dbname = "mydatabase";
+    $conn = Database::getInstance()->getConnection();
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
     $sql = "DELETE FROM stores WHERE id = ?";
@@ -134,4 +133,3 @@ if (isset($_POST['id'])) {
     </html>
     ';
 }
-?>

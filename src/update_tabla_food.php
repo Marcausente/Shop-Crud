@@ -1,28 +1,30 @@
 <?php
+
 require_once 'mydatabase.php'; // Incluir la conexión a la base de datos
 
 // Si se ha enviado el formulario con el ID
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
+    $type = $_POST['type'];
+    $price = $_POST['price'];
+    $is_perishable = isset($_POST['is_perishable']) ? 1 : 0; // Comprobamos si la casilla de perecedero está marcada
+    $caducidad = $_POST['caducidad'];
 
-    $city = $_POST['city'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
+    $conn = Database::getInstance()->getConnection();
 
-    $servername = "db";
-    $username = "myuser";
-    $password = "mypassword";
-    $dbname = "mydatabase";
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 
-    $sql = "UPDATE stores SET city = ?, email = ?, phone = ?, address = ? WHERE id = ?";
+    // Consulta para actualizar el producto
+    $sql = "UPDATE FoodDrinkNoExpendeable SET category = ?,
+    price = ?, is_perishable = ?, expiration_date = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $city, $email, $phone, $address, $id);
+    $stmt->bind_param("ssisi", $type, $price, $is_perishable, $caducidad, $id);
 
     if ($stmt->execute()) {
         echo '
@@ -72,13 +74,13 @@ if (isset($_POST['id'])) {
         <body>
             <div class="message-box">
                 <h2>¡El producto ha sido actualizado correctamente!</h2>
-                <a href="index.php">Volver al listado de tiendas</a>
+                <a href="indexFoodDrinkNoexpendable.php">Volver al listado de productos</a>
             </div>
         </body>
         </html>
         ';
     } else {
-        echo "Error al actualizar la tienda: " . $conn->error;
+        echo "Error al actualizar el producto: " . $conn->error;
     }
 
     $stmt->close();
@@ -151,9 +153,9 @@ if (isset($_POST['id'])) {
     <body>
         <div class="form-box">
             <h2>Actualizar información del producto</h2>
-            <form method="POST" action="updateTable.php">
+            <form method="POST" action="update_tabla_food.php">
                 <input type="number" name="id" placeholder="ID del producto" required>
-                <label for="type">Precio:</label>
+                <label for="type">Tipo:</label>
                 <select id="type" name="type" required>
                     <option value="Food">Food</option>
                     <option value="Drink">Drink</option>
@@ -163,8 +165,8 @@ if (isset($_POST['id'])) {
                 <label for="is_perishable">¿Es perecedero?</label>
                 <input type="checkbox" id="is_perishable" name="is_perishable">
                 <label for="caducidad">Nueva caducidad:</label>
-                <input type="date" name="caducidad" placeholder="Fecha de caducidad" required>
-                <button type="submit">Actualizar Tienda</button>
+                <input type="date" name="caducidad" required>
+                <button type="submit">Actualizar Producto</button>
             </form>
             <a href="indexFoodDrinkNoexpendable.php">Volver al listado de productos</a>
         </div>
@@ -172,4 +174,3 @@ if (isset($_POST['id'])) {
     </html>
     ';
 }
-?>

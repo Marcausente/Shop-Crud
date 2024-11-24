@@ -2,25 +2,45 @@
 require_once 'mydatabase.php'; // Incluir conexión a la base de datos
 require_once "store.php";
 
-$servername = "db";
-$username = "myuser";
-$password = "mypassword";
-$dbname = "mydatabase";
-
-// Crear la conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verificar la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
+$conn = Database::getInstance()->getConnection();
 
 // Comprobar si los datos han sido enviados a través del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Verificar que todos los campos del formulario están completos
-    if (empty($_POST['city']) || empty($_POST['address']) || empty($_POST['phone']) || empty($_POST['email']) || empty($_POST['opening_time']) || empty($_POST['closing_time'])) {
+    if (empty($_POST['city']) || empty($_POST['address'])
+        || empty($_POST['phone']) || empty($_POST['email']) ||
+        empty($_POST['opening_time']) || empty($_POST['closing_time'])) {
         die("Por favor complete todos los campos.");
+    }
+
+    function validatePhone($phone)
+    {
+        return preg_match("/^\d{9}$/", $phone);
+    }
+
+    // Validación de la hora en formato HH:MM
+    function validateHour($hour)
+    {
+        return preg_match("/^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/", $hour);
+    }
+
+    if (!validatePhone($_POST['phone'])) {
+        die("El teléfono debe tener 9 cifras.");
+    }
+
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        die("El correo electrónico no tiene un formato válido.");
+    }
+
+    $opening_time = !empty($_POST['opening_time']) ? $_POST['opening_time'] : null;
+    $closing_time = !empty($_POST['closing_time']) ? $_POST['closing_time'] : null;
+
+    if ($opening_time && !validateHour($opening_time)) {
+        die("La hora de apertura debe estar entre 00:00 y 23:59.");
+    }
+
+    if ($closing_time && !validateHour($closing_time)) {
+        die("La hora de cierre debe estar entre 00:00 y 23:59.");
     }
 
     // Crear un objeto Store con los datos del formulario
@@ -32,6 +52,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_POST['opening_time'],
         $_POST['closing_time']
     );
+
+    function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
 
     if ($store->saveToDatabase($conn)) {
         echo "Datos insertados correctamente";
@@ -190,10 +218,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <input type="email" id="email" name="email" required>
 
     <label for="opening_time">Hora de apertura:</label>
-    <input type="time" id="opening_time" name="opening_time" required>
+    <input type="time" id="opening_time" name="opening_time">
 
     <label for="closing_time">Hora de cierre:</label>
-    <input type="time" id="closing_time" name="closing_time" required>
+    <input type="time" id="closing_time" name="closing_time">
 
     <input type="submit" value="Enviar">
 
@@ -201,4 +229,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </form>
 </body>
 </html>
-
