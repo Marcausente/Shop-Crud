@@ -11,13 +11,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['store_id']) && isset($
     $storeId = intval($_POST['store_id']);
     $stockAmount = intval($_POST['stock_amount']);
 
-    // Validar que la cantidad de stock sea mayor que cero
-    if ($stockAmount > 0) {
+    // Validar que la cantidad de stock sea mayor o igual a cero
+    if ($stockAmount >= 0) {
+        // Actualizar el stock de la tienda con la ID dada
         $updateStockSql = "UPDATE StoresItems SET stock_quantity = stock_quantity + ? WHERE id_store = ?";
         $stmt = $conn->prepare($updateStockSql);
         if ($stmt) {
             $stmt->bind_param("ii", $stockAmount, $storeId);
             if ($stmt->execute()) {
+                // Si la actualización es exitosa, mostramos un mensaje de éxito
                 $mensaje = "El stock de la tienda con ID $storeId ha sido actualizado en $stockAmount unidades.";
             } else {
                 $mensaje = "Error al actualizar el stock. Inténtalo de nuevo.";
@@ -27,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['store_id']) && isset($
             $mensaje = "Error al preparar la consulta.";
         }
     } else {
-        $mensaje = "La cantidad de stock debe ser mayor que cero.";
+        $mensaje = "La cantidad de stock debe ser mayor o igual a cero.";
     }
 }
 
-// Obtener todas las tiendas y su stock actual
+// Obtener todas las tiendas y su stock actual después de la posible actualización
 $query = "
     SELECT stores.id, cities.name AS city, stores.address, stores.email, stores.phone, 
            COALESCE(SUM(StoresItems.stock_quantity), 0) AS stock_quantity
@@ -49,3 +51,99 @@ $stores = $result->fetch_all(MYSQLI_ASSOC); // Obtener todas las tiendas y su st
 
 $conn->close(); // Ahora cerramos la conexión después de usarla
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tiendas</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .mensaje {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h1>Gestión de Tiendas</h1>
+
+<?php if ($mensaje) : ?>
+    <div class="mensaje"><?php echo $mensaje; ?></div>
+<?php endif; ?>
+
+<h2>Actualizar Stock</h2>
+<form action="" method="post">
+    <label for="store_id">ID de la tienda:</label>
+    <input type="number" name="store_id" id="store_id" required>
+
+    <label for="stock_amount">Cantidad de stock a agregar:</label>
+    <input type="number" name="stock_amount" id="stock_amount" required>
+
+    <button type="submit">Actualizar Stock</button>
+</form>
+
+<h2>Lista de Tiendas</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ciudad</th>
+        <th>Dirección</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Stock</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($stores as $store) : ?>
+        <tr>
+            <td><?php echo $store['id']; ?></td>
+            <td><?php echo $store['city']; ?></td>
+            <td><?php echo $store['address']; ?></td>
+            <td><?php echo $store['email']; ?></td>
+            <td><?php echo $store['phone']; ?></td>
+            <td>
+                <?php
+                // Si el stock es 0, mostrar un espacio en blanco, de lo contrario, mostrar el número actualizado
+                echo ($store['stock_quantity'] > 0) ? $store['stock_quantity'] : '&nbsp;';
+                ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+<!-- Botón para regresar al índice -->
+<form action="index.php" method="get">
+    <button type="submit">Volver al Índice</button>
+</form>
+</body>
+</html>

@@ -1,6 +1,7 @@
 <?php
 
-class Database {
+class Database
+{
     private static $instance = null;
     private $conn;
 
@@ -9,7 +10,8 @@ class Database {
     private $password = "mypassword";
     private $dbname = "mydatabase";
 
-    private function __construct() {
+    private function __construct()
+    {
         $this->conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
 
         if ($this->conn->connect_error) {
@@ -17,14 +19,16 @@ class Database {
         }
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance === null) {
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn;
     }
 }
@@ -34,7 +38,8 @@ $db = Database::getInstance();
 $conn = $db->getConnection();
 
 // Crear tablas
-function createTables($conn) {
+function createTables($conn)
+{
     $queries = [
         "CREATE TABLE IF NOT EXISTS cities (
             id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +82,8 @@ function createTables($conn) {
 }
 
 // Insertar ciudades solo si no existen
-function insertCities($conn) {
+function insertCities($conn)
+{
     $cities = [
         1 => 'Madrid',
         2 => 'Barcelona',
@@ -117,6 +123,3 @@ function insertCities($conn) {
 // Ejecutar funciones
 createTables($conn);
 insertCities($conn);
-
-
-?>
