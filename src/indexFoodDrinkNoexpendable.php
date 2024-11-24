@@ -1,9 +1,8 @@
 <?php
-require_once 'mydatabase.php'; // Incluir conexión a la base de datos
+require_once 'mydatabase.php';
 
 $conn = Database::getInstance()->getConnection();
 
-// Obtener los productos de la tabla FoodDrinkNoExpendeable
 $query = "SELECT id, name, category, price, is_perishable, expiration_date FROM FoodDrinkNoExpendeable;";
 $result = $conn->query($query);
 
@@ -17,7 +16,6 @@ if (!$result) {
     <meta charset="UTF-8">
     <title>Lista de Alimentos y Bebidas No Expendeables</title>
     <style>
-        /* Estilo global para la página */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -25,7 +23,6 @@ if (!$result) {
             padding: 0;
         }
 
-        /* Estilo para el encabezado */
         h1 {
             text-align: center;
             color: #333;
@@ -35,7 +32,6 @@ if (!$result) {
             font-size: 2em;
         }
 
-        /* Estilo para el enlace de crear nuevo producto */
         a {
             text-decoration: none;
             color: white;
@@ -50,7 +46,6 @@ if (!$result) {
             background-color: #45a049;
         }
 
-        /* Estilo para la tabla */
         table {
             width: 80%;
             margin: 20px auto;
@@ -78,7 +73,6 @@ if (!$result) {
             background-color: #ddd;
         }
 
-        /* Estilo para los botones fuera de la tabla */
         .acciones {
             text-align: center;
             margin: 20px;
@@ -100,7 +94,6 @@ if (!$result) {
 <body>
 <h1>Lista de Alimentos y Bebidas No Expendeables</h1>
 
-<!-- Botón de acción para agregar un nuevo producto -->
 <div class="acciones">
     <a href="create_store_food.php">Crear Nuevo Producto</a>
 </div>
@@ -109,7 +102,6 @@ if (!$result) {
     <a href="index.php">Volver al Índice</a>
 </div>
 
-<!-- Tabla de productos -->
 <table border="1">
     <thead>
     <tr>
@@ -123,10 +115,8 @@ if (!$result) {
     </thead>
     <tbody>
     <?php
-    // Obtener todos los productos
-    $products = $result->fetch_all(MYSQLI_ASSOC);  // Obtenemos todos los registros en un array
+    $products = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Mostrar los productos en la tabla
     foreach ($products as $row) {
         echo '<tr>';
         echo '<td>' . $row['id'] . '</td>';
@@ -141,7 +131,6 @@ if (!$result) {
     </tbody>
 </table>
 
-<!-- Botones de acción fuera de la tabla -->
 <div class="acciones">
     <a href="update_tabla_food.php" class="actualizar">Actualizar Producto</a>
     <a href="delete_tabla_food.php" class="eliminar">Eliminar Producto</a>

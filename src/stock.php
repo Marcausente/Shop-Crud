@@ -1,25 +1,20 @@
 <?php
 require_once 'mydatabase.php';
 
-$conn = Database::getInstance()->getConnection(); // Crear conexión a la base de datos
+$conn = Database::getInstance()->getConnection();
 
-// Mensaje para mostrar el éxito o error de la actualización
 $mensaje = '';
 
-// Verificar si se ha enviado el formulario para actualizar el stock
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['store_id']) && isset($_POST['stock_amount'])) {
     $storeId = intval($_POST['store_id']);
     $stockAmount = intval($_POST['stock_amount']);
 
-    // Validar que la cantidad de stock sea mayor o igual a cero
     if ($stockAmount >= 0) {
-        // Actualizar el stock de la tienda con la ID dada
         $updateStockSql = "UPDATE StoresItems SET stock_quantity = stock_quantity + ? WHERE id_store = ?";
         $stmt = $conn->prepare($updateStockSql);
         if ($stmt) {
             $stmt->bind_param("ii", $stockAmount, $storeId);
             if ($stmt->execute()) {
-                // Si la actualización es exitosa, mostramos un mensaje de éxito
                 $mensaje = "El stock de la tienda con ID $storeId ha sido actualizado en $stockAmount unidades.";
             } else {
                 $mensaje = "Error al actualizar el stock. Inténtalo de nuevo.";
@@ -33,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['store_id']) && isset($
     }
 }
 
-// Obtener todas las tiendas y su stock actual después de la posible actualización
 $query = "
     SELECT stores.id, cities.name AS city, stores.address, stores.email, stores.phone, 
            COALESCE(SUM(StoresItems.stock_quantity), 0) AS stock_quantity
@@ -47,9 +41,9 @@ if (!$result) {
     die("Error en la consulta: " . $conn->error);
 }
 
-$stores = $result->fetch_all(MYSQLI_ASSOC); // Obtener todas las tiendas y su stock
+$stores = $result->fetch_all(MYSQLI_ASSOC);
 
-$conn->close(); // Ahora cerramos la conexión después de usarla
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +126,6 @@ $conn->close(); // Ahora cerramos la conexión después de usarla
             <td><?php echo $store['phone']; ?></td>
             <td>
                 <?php
-                // Si el stock es 0, mostrar un espacio en blanco, de lo contrario, mostrar el número actualizado
                 echo ($store['stock_quantity'] > 0) ? $store['stock_quantity'] : '&nbsp;';
                 ?>
             </td>
@@ -141,7 +134,6 @@ $conn->close(); // Ahora cerramos la conexión después de usarla
     </tbody>
 </table>
 
-<!-- Botón para regresar al índice -->
 <form action="index.php" method="get">
     <button type="submit">Volver al Índice</button>
 </form>

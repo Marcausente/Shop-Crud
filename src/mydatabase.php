@@ -33,11 +33,9 @@ class Database
     }
 }
 
-// Uso de la clase Singleton
 $db = Database::getInstance();
 $conn = $db->getConnection();
 
-// Crear tablas
 function createTables($conn)
 {
     $queries = [
@@ -81,7 +79,6 @@ function createTables($conn)
     }
 }
 
-// Insertar ciudades solo si no existen
 function insertCities($conn)
 {
     $cities = [
@@ -120,6 +117,5 @@ function insertCities($conn)
     }
 }
 
-// Ejecutar funciones
 createTables($conn);
 insertCities($conn);

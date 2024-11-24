@@ -1,12 +1,10 @@
 <?php
-require_once 'mydatabase.php'; // Incluye la conexión a la base de datos
+require_once 'mydatabase.php';
 require_once 'FoodDrinkNoExpendeable.php';
 
 $conn = Database::getInstance()->getConnection();
 
-// Comprobar si los datos han sido enviados a través del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar que todos los campos obligatorios están completos
     if (empty($_POST['name']) || empty($_POST['category']) || empty($_POST['price'])) {
         die("Por favor complete todos los campos obligatorios.");
     }
@@ -30,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $data;
     }
 
-    // Insertar los datos en la base de datos
+
     if ($item->saveToDatabase($conn)) {
         echo "Se ha creado un nuevo producto.";
     } else {
@@ -48,7 +46,6 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Productos</title>
     <style>
-        /* Estilos para el formulario */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -88,7 +85,6 @@ $conn->close();
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-        /* Botón de regreso */
         input[type="button"] {
             padding: 10px;
             background-color: #2196F3;

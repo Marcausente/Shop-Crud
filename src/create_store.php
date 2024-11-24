@@ -1,12 +1,10 @@
 <?php
-require_once 'mydatabase.php'; // Incluir conexión a la base de datos
+require_once 'mydatabase.php';
 require_once "store.php";
 
 $conn = Database::getInstance()->getConnection();
 
-// Comprobar si los datos han sido enviados a través del formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verificar que todos los campos del formulario están completos
     if (empty($_POST['city']) || empty($_POST['address'])
         || empty($_POST['phone']) || empty($_POST['email']) ||
         empty($_POST['opening_time']) || empty($_POST['closing_time'])) {
@@ -18,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return preg_match("/^\d{9}$/", $phone);
     }
 
-    // Validación de la hora en formato HH:MM
     function validateHour($hour)
     {
         return preg_match("/^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/", $hour);
@@ -42,8 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($closing_time && !validateHour($closing_time)) {
         die("La hora de cierre debe estar entre 00:00 y 23:59.");
     }
-
-    // Crear un objeto Store con los datos del formulario
     $store = new Store(
         $_POST['city'],
         $_POST['address'],
@@ -76,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Tienda</title>
     <style>
-        /* Estilo global */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f2f2f2;
@@ -89,7 +83,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #444;
         }
 
-        /* Título */
         h1 {
             font-size: 2rem;
             color: #333;
@@ -97,18 +90,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 20px;
             font-weight: 600;
         }
-
-        /* Contenedor del formulario */
         form {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 350px; /* Ajustar el ancho del formulario */
+            max-width: 350px;
         }
 
-        /* Estilo de las etiquetas y campos de entrada */
         label {
             display: block;
             font-size: 0.9rem;
@@ -120,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         input[type="email"],
         input[type="time"],
         select {
-            width: calc(100% - 20px); /* Ajustar el ancho para ocupar menos espacio horizontal */
+            width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 15px;
             border: 2px solid #ddd;
@@ -138,7 +128,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             outline: none;
         }
 
-        /* Botón de envío */
         input[type="submit"] {
             background-color: #4CAF50;
             color: white;
@@ -155,7 +144,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #45a049;
         }
 
-        /* Estilo para el enlace */
         a.boton {
             display: block;
             text-align: center;
@@ -174,7 +162,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             background-color: #bbdefb;
         }
 
-        /* Mensajes (error, éxito, etc.) */
         .mensaje {
             color: #d32f2f;
             text-align: center;

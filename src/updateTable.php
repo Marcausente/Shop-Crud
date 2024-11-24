@@ -1,7 +1,6 @@
 <?php
-require_once 'mydatabase.php'; // Incluir la conexión a la base de datos
+require_once 'mydatabase.php';
 
-// Si se ha enviado el formulario con el ID
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
 

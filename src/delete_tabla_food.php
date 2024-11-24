@@ -1,9 +1,8 @@
 <?php
-require_once 'mydatabase.php'; // Incluir la conexión a la base de datos
+require_once 'mydatabase.php';
 
-// Si el formulario ha sido enviado
 if (isset($_POST['id'])) {
-    $id = $_POST['id']; // Obtener el ID enviado por el formulario
+    $id = $_POST['id'];
 
     $conn = Database::getInstance()->getConnection();
 
@@ -15,7 +14,6 @@ if (isset($_POST['id'])) {
         return $data;
     }
 
-    // SQL para eliminar el producto de la tabla FoodDrinkNoExpendeable
     $sql = "DELETE FROM FoodDrinkNoExpendeable WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -99,13 +97,13 @@ if (isset($_POST['id'])) {
                 width: 320px;
             }
             .form-box input {
-                padding: 10px 20px 10px 10px; /* Más espacio a la derecha */
+                padding: 10px 20px 10px 10px;
                 font-size: 14px;
                 margin-bottom: 10px;
                 width: 100%;
                 border-radius: 4px;
                 border: 1px solid #ccc;
-                box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+                box-sizing: border-box; 
             }
             .form-box button {
                 padding: 10px 20px;

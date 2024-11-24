@@ -1,5 +1,5 @@
 <?php
-require_once 'mydatabase.php'; // Incluir conexión a la base de datos
+require_once 'mydatabase.php';
 
 $conn = Database::getInstance()->getConnection();
 
@@ -18,7 +18,6 @@ if (!$result) {
     <meta charset="UTF-8">
     <title>Lista de Tiendas</title>
     <style>
-        /* Estilo global para la página */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -26,7 +25,6 @@ if (!$result) {
             padding: 0;
         }
 
-        /* Estilo para el encabezado */
         h1 {
             text-align: center;
             color: #333;
@@ -36,7 +34,6 @@ if (!$result) {
             font-size: 2em;
         }
 
-        /* Estilo para el enlace de crear nueva tienda */
         a {
             text-decoration: none;
             color: white;
@@ -51,7 +48,6 @@ if (!$result) {
             background-color: #45a049;
         }
 
-        /* Estilo para la tabla */
         table {
             width: 80%;
             margin: 20px auto;
@@ -79,7 +75,6 @@ if (!$result) {
             background-color: #ddd;
         }
 
-        /* Estilo para los botones fuera de la tabla */
         .acciones {
             text-align: center;
             margin: 20px;
@@ -93,7 +88,6 @@ if (!$result) {
             background-color: #f44336;
         }
 
-        /* Estilo específico para el botón de actualizar tienda */
         .acciones a.actualizar {
             background-color: #ff9800;
         }
@@ -106,7 +100,6 @@ if (!$result) {
 <body>
 <h1>Lista de Tiendas</h1>
 
-<!-- Botones de acción en la parte superior -->
 <div class="acciones">
     <a href="create_store.php">Crear Nueva Tienda</a>
 </div>
@@ -115,7 +108,6 @@ if (!$result) {
     <a href="indexFoodDrinkNoexpendable.php">Ver index Food Drink</a>
 </div>
 
-<!-- Tabla de tiendas sin columna de acciones -->
 <table border="1">
     <thead>
     <tr>
@@ -128,10 +120,8 @@ if (!$result) {
     </thead>
     <tbody>
     <?php
-    // Obtener todas las tiendas
-    $stores = $result->fetch_all(MYSQLI_ASSOC);  // Obtenemos todos los registros en un array
+    $stores = $result->fetch_all(MYSQLI_ASSOC);
 
-    // Mostrar las tiendas en la tabla
     foreach ($stores as $row) {
         echo '<tr>';
         echo '<td>' . $row['id'] . '</td>';
@@ -145,7 +135,6 @@ if (!$result) {
     </tbody>
 </table>
 
-<!-- Botones de acción fuera de la tabla (sin relación con los valores de la tabla) -->
 <div class="acciones">
     <a href="updateTable.php" class="actualizar">Actualizar Tienda</a>
     <a href="deleteTable.php" class="eliminar">Eliminar Tienda</a>

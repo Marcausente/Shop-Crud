@@ -1,13 +1,12 @@
 <?php
 
-require_once 'mydatabase.php'; // Incluir la conexión a la base de datos
+require_once 'mydatabase.php';
 
-// Si se ha enviado el formulario con el ID
 if (isset($_POST['id'])) {
     $id = $_POST['id'];
     $type = $_POST['type'];
     $price = $_POST['price'];
-    $is_perishable = isset($_POST['is_perishable']) ? 1 : 0; // Comprobamos si la casilla de perecedero está marcada
+    $is_perishable = isset($_POST['is_perishable']) ? 1 : 0;
     $caducidad = $_POST['caducidad'];
 
     $conn = Database::getInstance()->getConnection();
@@ -20,7 +19,6 @@ if (isset($_POST['id'])) {
         return $data;
     }
 
-    // Consulta para actualizar el producto
     $sql = "UPDATE FoodDrinkNoExpendeable SET category = ?,
     price = ?, is_perishable = ?, expiration_date = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
